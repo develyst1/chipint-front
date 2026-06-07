@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Trash2, ShoppingBag, ArrowRight, Plus, Minus } from "lucide-react";
 import { BaseButton } from "@/components/ui/Button";
+import { ProductImagePlaceholder } from "@/components/common";
 import { useCart } from "@/context/cart/CartProvider";
 
 export default function CartContent() {
@@ -48,7 +49,7 @@ export default function CartContent() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={item.imageUrl} alt={item.productNameTh} className="h-full w-full object-contain p-2" />
                 ) : (
-                  <span className="text-3xl">🤖</span>
+                  <ProductImagePlaceholder size="sm" />
                 )}
               </div>
 

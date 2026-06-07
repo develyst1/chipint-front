@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Star, Bot, CircuitBoard, Zap, Gem } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { BaseBadge } from "@/components/ui/Badge";
 import { ROBOT_TIER_LABEL, AI_PROVIDER_LABEL } from "@/types/app/product";
 import type { RobotTier, AiProvider } from "@/types/app/product";
@@ -15,7 +16,7 @@ interface MockRobot {
   discountedPrice?: number;
   rating: number;
   aiProviders: AiProvider[];
-  emoji: string;
+  icon: LucideIcon;
   isNew: boolean;
 }
 
@@ -28,7 +29,7 @@ const MOCK_ROBOTS: MockRobot[] = [
     basePrice: 1990,
     rating: 4.5,
     aiProviders: ["OPENAI"],
-    emoji: "🤖",
+    icon: Bot,
     isNew: false,
   },
   {
@@ -40,7 +41,7 @@ const MOCK_ROBOTS: MockRobot[] = [
     discountedPrice: 3990,
     rating: 4.7,
     aiProviders: ["OPENAI", "GEMINI"],
-    emoji: "🦾",
+    icon: CircuitBoard,
     isNew: true,
   },
   {
@@ -51,7 +52,7 @@ const MOCK_ROBOTS: MockRobot[] = [
     basePrice: 7990,
     rating: 4.9,
     aiProviders: ["OPENAI", "XAI", "DEEPSEEK"],
-    emoji: "⚡",
+    icon: Zap,
     isNew: true,
   },
   {
@@ -62,7 +63,7 @@ const MOCK_ROBOTS: MockRobot[] = [
     basePrice: 14990,
     rating: 5.0,
     aiProviders: ["OPENAI", "XAI", "DEEPSEEK", "GEMINI"],
-    emoji: "💎",
+    icon: Gem,
     isNew: false,
   },
 ];
@@ -90,6 +91,7 @@ export default function HomeFeaturedRobots() {
           {MOCK_ROBOTS.map((robot) => {
             const tier = ROBOT_TIER_LABEL[robot.tier];
             const price = robot.discountedPrice ?? robot.basePrice;
+            const RobotIcon = robot.icon;
 
             return (
               <Link
@@ -99,7 +101,7 @@ export default function HomeFeaturedRobots() {
               >
                 {/* Image placeholder */}
                 <div className="relative mb-4 flex h-40 items-center justify-center rounded-xl bg-slate-900/60 border border-slate-700">
-                  <span className="text-7xl">{robot.emoji}</span>
+                  <RobotIcon strokeWidth={1.25} className="h-20 w-20 text-indigo-400/70" />
                   <div className="absolute top-2 left-2 flex gap-1.5">
                     <BaseBadge label={tier.th} color={tier.color} size="sm" />
                     {robot.isNew && <BaseBadge label="ใหม่" color="#22c55e" size="sm" />}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Zap, Shield, Cpu } from "lucide-react";
+import { ArrowRight, Zap, Shield, Cpu, Bot } from "lucide-react";
 import { BaseButton } from "@/components/ui/Button";
 import { HERO_TAGLINE, HERO_SUBTITLE } from "./Home.config";
 
@@ -67,9 +67,9 @@ export default function HomeHero() {
               {/* Outer ring */}
               <div className="absolute inset-0 rounded-full border border-indigo-500/20 animate-pulse" />
               <div className="h-80 w-80 rounded-full bg-gradient-to-br from-indigo-900/40 to-slate-800/60 border border-indigo-500/30 flex items-center justify-center glow-primary">
-                {/* Placeholder robot icon — replace with actual 3D render / image */}
+                {/* Placeholder visual — replace with actual 3D render / product image */}
                 <div className="text-center">
-                  <div className="text-8xl mb-2">🤖</div>
+                  <Bot strokeWidth={1.25} className="h-28 w-28 mx-auto mb-2 text-indigo-300 text-glow" />
                   <div className="text-xs text-indigo-300 font-mono">CHIPINT-G3</div>
                 </div>
               </div>

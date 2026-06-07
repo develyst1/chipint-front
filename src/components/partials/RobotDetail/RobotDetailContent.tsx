@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ShoppingCart, Star, Check, ChevronLeft } from "lucide-react";
+import { ShoppingCart, Star, Check, ChevronLeft, PackageX } from "lucide-react";
 import Link from "next/link";
 import { BaseButton } from "@/components/ui/Button";
 import { BaseBadge } from "@/components/ui/Badge";
+import { ProductImagePlaceholder } from "@/components/common";
 import { useRobotDetail } from "@/hooks/products";
 import { useCart } from "@/context/cart/CartProvider";
 import { ROBOT_TIER_LABEL, AI_PROVIDER_LABEL } from "@/types/app/product";
@@ -40,7 +41,7 @@ export default function RobotDetailContent({ slug }: RobotDetailContentProps) {
   if (!robot) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-24 text-center">
-        <div className="text-6xl mb-4">😢</div>
+        <PackageX strokeWidth={1.25} className="h-16 w-16 text-slate-600 mx-auto mb-4" />
         <p className="text-slate-400">ไม่พบสินค้าที่ต้องการ</p>
         <Link href="/products/robots">
           <BaseButton variant="outline" className="mt-6">กลับไปเลือกหุ่นยนต์</BaseButton>
@@ -90,7 +91,7 @@ export default function RobotDetailContent({ slug }: RobotDetailContentProps) {
             // eslint-disable-next-line @next/next/no-img-element
             <img src={robot.images[0].url} alt={robot.images[0].alt} className="max-h-80 object-contain" />
           ) : (
-            <span className="text-9xl">🤖</span>
+            <ProductImagePlaceholder size="xl" />
           )}
         </div>
 

@@ -75,6 +75,7 @@ The root layout (`src/app/layout.tsx`) wraps the app in two providers from `src/
 ### Components
 
 - **`components/ui/`** — thin Ant Design wrappers with project-specific defaults (e.g. `BaseButton` wraps antd `Button`, mapping the domain `variant` prop — `primary | secondary | outline | ghost | danger` — onto antd's `color`+`variant` combo; `BaseBadge` wraps antd `Tag` for hex-based tier/AI-provider color chips). Always prefer these over raw Ant Design primitives or plain HTML elements so theming and sizing stay consistent.
+- **`components/common/ProductImagePlaceholder`** — icon-based "no image" placeholder (wraps lucide-react's `Bot`). **Never use emoji as icons or placeholder art** — they render inconsistently across platforms/fonts. Always use `lucide-react` (already a dependency) or `@ant-design/icons` for any icon/illustration need.
 - **`components/layout/`** — Header (sticky, shows cart count from `useCart`) and Footer.
 - **`components/partials/`** — feature-level page sections. `"use client"` only where state/effects are needed; everything else is a server component by default.
 

@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart, Star, PackageSearch } from "lucide-react";
 import { BaseBadge } from "@/components/ui/Badge";
 import { BaseButton } from "@/components/ui/Button";
+import { ProductImagePlaceholder } from "@/components/common";
 import { useRobotList } from "@/hooks/products";
 import { ROBOT_TIER_LABEL, AI_PROVIDER_LABEL } from "@/types/app/product";
 import type { RobotTier } from "@/types/app/product";
@@ -38,7 +39,7 @@ export default function RobotCatalogGrid({ filters }: RobotCatalogGridProps) {
   if (!robots.length) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <div className="text-6xl mb-4">🤖</div>
+        <PackageSearch strokeWidth={1.25} className="h-16 w-16 text-slate-600 mb-4" />
         <p className="text-slate-400">ไม่พบหุ่นยนต์ที่ตรงกับเงื่อนไข</p>
       </div>
     );
@@ -61,7 +62,7 @@ export default function RobotCatalogGrid({ filters }: RobotCatalogGridProps) {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={robot.images[0].url} alt={robot.images[0].alt} className="h-full w-full object-contain p-4" />
                 ) : (
-                  <span className="text-7xl">🤖</span>
+                  <ProductImagePlaceholder size="lg" />
                 )}
                 <div className="absolute top-2 left-2 flex gap-1.5 flex-wrap">
                   <BaseBadge label={tier.th} color={tier.color} />

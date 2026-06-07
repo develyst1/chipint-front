@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MemoryStick } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "ชิปและอุปกรณ์",
@@ -16,7 +17,7 @@ export default function ChipsPage() {
         {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} className="rounded-2xl border border-slate-700 bg-slate-800/60 p-5 card-hover">
             <div className="h-40 rounded-xl bg-slate-900/60 border border-slate-700 flex items-center justify-center mb-4">
-              <span className="text-5xl">💾</span>
+              <MemoryStick strokeWidth={1.25} className="h-16 w-16 text-indigo-400/60" />
             </div>
             <div className="h-4 rounded bg-slate-700/60 mb-2 w-3/4" />
             <div className="h-3 rounded bg-slate-700/40 mb-4 w-1/2" />
