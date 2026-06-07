@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AntdStyleRegistry } from "@/context/theme/AntdStyleRegistry";
+import { AntdProvider } from "@/context/theme/AntdProvider";
 import { QueryProvider } from "@/context/query/QueryProvider";
 import { CartProvider } from "@/context/cart/CartProvider";
 
@@ -27,9 +29,13 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body>
-        <QueryProvider>
-          <CartProvider>{children}</CartProvider>
-        </QueryProvider>
+        <AntdStyleRegistry>
+          <AntdProvider>
+            <QueryProvider>
+              <CartProvider>{children}</CartProvider>
+            </QueryProvider>
+          </AntdProvider>
+        </AntdStyleRegistry>
       </body>
     </html>
   );

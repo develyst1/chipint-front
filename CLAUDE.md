@@ -65,9 +65,16 @@ Tailwind v4 uses CSS-based configuration — theme tokens are defined in `src/ap
 
 **`postcss.config.js` must use CommonJS** (`module.exports = { … }`), not ESM — PostCSS is loaded directly by Node before the bundler runs.
 
+### Ant Design integration
+
+The root layout (`src/app/layout.tsx`) wraps the app in two providers from `src/context/theme/`:
+
+- **`AntdStyleRegistry`** — hand-rolled SSR style registry built on `@ant-design/cssinjs` (already an antd dependency, no extra package needed) following Ant Design's documented App Router setup. Collects CSS-in-JS output during server render and injects it via `useServerInsertedHTML`, preventing FOUC/hydration style mismatches. Must wrap everything that renders Ant Design components.
+- **`AntdProvider`** — `ConfigProvider` with the `darkAlgorithm` and custom tokens (primary indigo `#6366f1`, dark surfaces matching the Tailwind `@theme` tokens in `globals.css`). Any Ant Design component used directly automatically picks up this theme. Add Thai locale (`antd/locale/th_TH`) here if a component renders localized text (DatePicker, Pagination, Table, etc.).
+
 ### Components
 
-- **`components/ui/`** — primitive wrappers (Button, Badge). Prefer these over using Ant Design or raw HTML directly.
+- **`components/ui/`** — thin Ant Design wrappers with project-specific defaults (e.g. `BaseButton` wraps antd `Button`, mapping the domain `variant` prop — `primary | secondary | outline | ghost | danger` — onto antd's `color`+`variant` combo; `BaseBadge` wraps antd `Tag` for hex-based tier/AI-provider color chips). Always prefer these over raw Ant Design primitives or plain HTML elements so theming and sizing stay consistent.
 - **`components/layout/`** — Header (sticky, shows cart count from `useCart`) and Footer.
 - **`components/partials/`** — feature-level page sections. `"use client"` only where state/effects are needed; everything else is a server component by default.
 

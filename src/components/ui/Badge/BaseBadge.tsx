@@ -1,44 +1,54 @@
 "use client";
 
+import { Tag } from "antd";
 import { clsx } from "clsx";
+
+export type AppBadgeVariant = "solid" | "outline" | "glow";
+export type AppBadgeSize = "sm" | "md";
 
 interface BaseBadgeProps {
   label: string;
   color?: string;
-  variant?: "solid" | "outline" | "glow";
-  size?: "sm" | "md";
+  variant?: AppBadgeVariant;
+  size?: AppBadgeSize;
   className?: string;
 }
 
+const DEFAULT_COLOR = "#6366f1";
+
+const SIZE_CLASSES: Record<AppBadgeSize, string> = {
+  sm: "text-xs! px-2.5! py-0.5! leading-4!",
+  md: "text-sm! px-3! py-1! leading-5!",
+};
+
+/**
+ * Thin wrapper around Ant Design's `Tag`, applying the project's
+ * hex-based color tokens (tier colors, AI provider colors, status
+ * colors) with solid / outline / glow presentation styles.
+ */
 export default function BaseBadge({
   label,
-  color,
+  color = DEFAULT_COLOR,
   variant = "solid",
   size = "sm",
   className,
 }: BaseBadgeProps) {
   return (
-    <span
+    <Tag
+      bordered
       className={clsx(
-        "inline-flex items-center font-semibold rounded-full",
-        size === "sm" ? "px-2.5 py-0.5 text-xs" : "px-3 py-1 text-sm",
-        !color && variant === "solid" && "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30",
-        !color && variant === "outline" && "bg-transparent text-indigo-400 border border-indigo-500",
-        !color && variant === "glow" && "bg-indigo-500/20 text-indigo-300 border border-indigo-500/50 shadow-[0_0_8px_rgba(99,102,241,0.4)]",
+        "rounded-full! m-0! font-semibold! border! inline-flex! items-center!",
+        SIZE_CLASSES[size],
         className,
       )}
-      style={
-        color
-          ? {
-              backgroundColor: `${color}20`,
-              color: color,
-              borderColor: `${color}40`,
-              border: "1px solid",
-            }
-          : undefined
-      }
+      style={{
+        backgroundColor: variant === "outline" ? "transparent" : `${color}20`,
+        color,
+        borderColor: variant === "glow" ? `${color}90` : `${color}40`,
+        boxShadow: variant === "glow" ? `0 0 8px ${color}66` : undefined,
+      }}
     >
       {label}
-    </span>
+    </Tag>
   );
 }
