@@ -61,6 +61,7 @@ export default function RobotDetailContent({ slug }: RobotDetailContentProps) {
       selectedSkinId: activeSkin?.id,
       selectedAiProvider: selectedAi ?? undefined,
       product: {
+        productId: robot.id,
         productName: robot.name,
         productNameTh: robot.nameTh,
         productSlug: robot.slug,
